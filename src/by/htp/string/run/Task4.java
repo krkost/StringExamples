@@ -4,6 +4,7 @@ package by.htp.string.run;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Task4 {
@@ -11,6 +12,13 @@ public class Task4 {
 	public static void main(String[] args) {
 
 		File f = new File("resources/task4.txt");
+		if (!f.exists()) {
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		try {
 			StringBuilder sB = stringReader(f);
 			int k = readNumber();
@@ -27,12 +35,12 @@ public class Task4 {
 	}
 
 	public static StringBuilder stringReader(File f) throws FileNotFoundException {
-		Scanner scan = new Scanner(f);
+		Scanner sc = new Scanner(f);
 		StringBuilder sB = new StringBuilder("");
-		while (scan.hasNext()) {
-			sB = sB.append(scan.nextLine());
+		while (sc.hasNext()) {
+			sB = sB.append(sc.nextLine());
 		}
-		scan.close();
+		sc.close();
 		return sB;
 	}
 	
